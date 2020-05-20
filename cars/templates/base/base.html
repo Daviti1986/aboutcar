@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cars/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="nav-link" href="{% url 'cars:index' %}">
+                    <h1>Mycar</h1>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        {% for car in object_list %}
+                        <li class="nav-item active">
+                            <a href="{% url 'cars:detail' car.id %}" class="glyphicon glyphicon-road" aria-hidden="true">
+                                 {{car.Make}}
+                            </a>
+                        </li>
+                        <img src="{{Car.car_image}}">
+                        {% endfor %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="{% url 'cars:car_add' %}">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                &nbsp; Add car
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{% url 'cars:index' %}">
+                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                &nbsp; Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block body %}
+        {% endblock %}
+</body>
+</html>
